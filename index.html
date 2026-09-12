@@ -51,7 +51,6 @@
             color: #000000;
         }
 
-        /* STYLE LOGO GAMBAR */
         .logo-img {
             height: 45px;
             width: auto;
@@ -167,7 +166,6 @@
             overflow: hidden;
         }
 
-        /* LOGO DI DALAM PLAYER RADIO */
         .player-logo {
             max-height: 120px;
             max-width: 80%;
@@ -322,7 +320,7 @@
             font-weight: bold;
         }
 
-        /* JADWAL */
+        /* PROGRAM */
         .schedule {
             max-width: 850px;
             margin: auto;
@@ -345,12 +343,6 @@
             font-size: 16px;
             color: #000000;
             font-weight: bold;
-        }
-
-        .schedule-item p {
-            color: #666666;
-            font-size: 13px;
-            margin-top: 2px;
         }
 
         .schedule-time {
@@ -415,20 +407,18 @@
         }
     </style>
 </head>
-
 <body>
 
 <header>
     <nav>
         <div class="logo">
-            <!-- GANTI "logo.png" DENGAN NAMA FILE GAMBAR LOGOMU -->
             <img src="logo.png" alt="Radio Muara Logo" class="logo-img">
             RADIO MUARA NETWORK
         </div>
         <ul class="nav-links">
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#jaringan">Jaringan</a></li>
-            <li><a href="#jadwal">Jadwal</a></li>
+            <li><a href="#program">Program</a></li>
             <li><a href="#kontak">Kontak</a></li>
         </ul>
     </nav>
@@ -448,7 +438,6 @@
     <div class="player">
         <div class="album">
             <div class="live">● LIVE STREAMING</div>
-            <!-- LOGO DI KARTU PLAYER -->
             <img src="logo.png" alt="Radio Muara" class="player-logo">
         </div>
         <div class="song-info">
@@ -463,12 +452,11 @@
             </div>
         </div>
         <audio id="radio">
-            <source src="" type="audio/mpeg">
+            <source src="https://ssg.streamingmurah.com:8778/stream/1/" type="audio/mpeg">
         </audio>
     </div>
 </section>
 
-<!-- JARINGAN STASIUN -->
 <section id="jaringan" class="bg-gray">
     <div class="section-title">
         <h2>Jaringan Radio Muara</h2>
@@ -528,38 +516,48 @@
     </div>
 </section>
 
-<!-- JADWAL -->
-<section id="jadwal">
+<!-- PROGRAM SEKSI -->
+<section id="program">
     <div class="section-title">
-        <h2>Jadwal Siaran</h2>
+        <h2>Program Siaran</h2>
         <p>Program Unggulan Radio Muara</p>
     </div>
     <div class="schedule">
         <div class="schedule-item">
-            <div>
-                <h3>Muara Pagi</h3>
-                <p>Musik & Informasi Pagi</p>
-            </div>
-            <div class="schedule-time">06:00 – 10:00</div>
+            <h3>Goda Gado Muara</h3>
+            <div class="schedule-time">07.00 - 10.00</div>
         </div>
         <div class="schedule-item">
-            <div>
-                <h3>Muara Hits</h3>
-                <p>Lagu-lagu Hits Pilihan</p>
-            </div>
-            <div class="schedule-time">10:00 – 14:00</div>
+            <h3>Talkshow Produk</h3>
+            <div class="schedule-time">10.00 - 11.00</div>
         </div>
         <div class="schedule-item">
-            <div>
-                <h3>Muara Siang</h3>
-                <p>Request & Salam Pendengar</p>
-            </div>
-            <div class="schedule-time">14:00 – 17:00</div>
+            <h3>Sultan Dangdut Riley Cirebon</h3>
+            <div class="schedule-time">11.00 - 14.00</div>
+        </div>
+        <div class="schedule-item">
+            <h3>Doski Disko</h3>
+            <div class="schedule-time">14.00 - 17.30</div>
+        </div>
+        <div class="schedule-item">
+            <h3>Temu Iman</h3>
+            <div class="schedule-time">17.30 - 18.00</div>
+        </div>
+        <div class="schedule-item">
+            <h3>Soneta Irama</h3>
+            <div class="schedule-time">18.00 - 20.00</div>
+        </div>
+        <div class="schedule-item">
+            <h3>Ruang Dangdut Riley Ke Patroman</h3>
+            <div class="schedule-time">20.00 - 23.00</div>
+        </div>
+        <div class="schedule-item">
+            <h3>Talkshow Juara</h3>
+            <div class="schedule-time">23.00 - 00.00</div>
         </div>
     </div>
 </section>
 
-<!-- KONTAK -->
 <section id="kontak" class="bg-gray">
     <div class="section-title">
         <h2>Contact Person</h2>
@@ -602,15 +600,10 @@
     });
 
     function toggleRadio() {
-        const source = radio.querySelector("source");
-
-        if (!source.src) {
-            alert("URL streaming Radio Muara belum diisi.");
-            return;
-        }
-
         if (radio.paused) {
-            radio.play();
+            radio.play().catch(err => {
+                alert("Gagal memutar audio: " + err.message);
+            });
             playButton.innerHTML = "Ⅱ";
         } else {
             radio.pause();
