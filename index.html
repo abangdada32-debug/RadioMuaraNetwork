@@ -23,14 +23,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #ffffff;
             color: #000000;
-            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
-            background-size: 20px 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* NAVBAR */
+        /* NAVBAR HEADER */
         header {
             position: fixed;
             top: 0;
@@ -333,7 +331,7 @@
 
         .song-info h2 {
             margin-top: 4px;
-            font-size: 22px;
+            font-size: 20px;
             color: #000000;
             font-weight: 900;
         }
@@ -367,6 +365,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .play-button:hover {
@@ -384,13 +383,24 @@
             font-weight: bold;
         }
 
+        .volume-icon {
+            cursor: pointer;
+            font-size: 20px;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+
+        .volume-icon:hover {
+            transform: scale(1.15);
+        }
+
         .volume input {
             width: 100%;
             accent-color: #000000;
             cursor: pointer;
         }
 
-        /* SECTIONS HASIL LOADING */
+        /* SECTIONS */
         section.page-section {
             padding: 60px 5%;
             width: 90%;
@@ -448,12 +458,16 @@
             transition: 0.2s ease;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
         }
 
         .station-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* LOGO MEMENUHI SELURUH LINGKARAN */
+            object-fit: contain;
             transition: transform 0.3s ease;
         }
 
@@ -486,7 +500,6 @@
 
         .schedule-item {
             padding: 20px 25px;
-            background: #ffffff;
             border: 3px solid #000000;
             display: flex;
             justify-content: space-between;
@@ -513,15 +526,27 @@
             font-weight: 900;
             font-size: 13px;
             border: 2px solid #000000;
-            box-shadow: 2px 2px 0px #888888;
+            box-shadow: 2px 2px 0px #ffffff;
         }
 
-        .schedule-item.religi { background-color: #ffffff; border-left: 12px solid #000000; }
-        .schedule-item.dangdut { background-color: #fcfcfc; border-left: 12px solid #444444; }
-        .schedule-item.talkshow { background-color: #ffffff; border-left: 12px solid #222222; }
-        .schedule-item.hiburan { background-color: #f9f9f9; border-left: 12px solid #666666; }
+        .schedule-item.religi { 
+            background-color: #d1e7dd; 
+            border-left: 12px solid #0f5132; 
+        }
+        .schedule-item.dangdut { 
+            background-color: #f8d7da; 
+            border-left: 12px solid #842029; 
+        }
+        .schedule-item.talkshow { 
+            background-color: #cff4fc; 
+            border-left: 12px solid #055160; 
+        }
+        .schedule-item.hiburan { 
+            background-color: #fff3cd; 
+            border-left: 12px solid #664d03; 
+        }
 
-        /* KONTAK */
+        /* KONTAK STYLES BARU */
         .contact {
             max-width: 950px;
             margin: auto;
@@ -538,7 +563,7 @@
         }
 
         .contact-box h3 {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: #000000;
             font-size: 16px;
             font-weight: 900;
@@ -549,6 +574,39 @@
             line-height: 1.6;
             font-size: 14px;
             font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon-link {
+            display: inline-block;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-icon-link:hover {
+            transform: scale(1.1);
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .contact-text a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-text a:hover {
+            text-decoration: underline;
         }
 
         /* FOOTER */
@@ -652,21 +710,22 @@
                     </div>
                 </div>
                 <div class="song-info">
-                    <small>SEDANG MENGUDARA</small>
-                    <h2 id="song">Radio Muara Network</h2>
-                    <p id="artist">Suara Musik Nusantara</p>
+                    <small>SEDANG STREAMING</small>
+                    <h2 id="song">Memuat Program...</h2>
+                    <p id="artist">Radio Muara Network (WIB)</p>
                 </div>
                 <div class="controls">
                     <button class="play-button" id="playButton" onclick="toggleRadio()">▶</button>
                     <div class="volume">
-                        🔊 <input type="range" min="0" max="1" value="0.8" step="0.01" id="volume">
+                        <span class="volume-icon" id="volumeIcon" onclick="toggleMute()">🔊</span>
+                        <input type="range" min="0" max="1" value="0.8" step="0.01" id="volume">
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- TAB 2: JARINGAN (LOGO PENUH & NAMA DI BAWAH) -->
+    <!-- TAB 2: JARINGAN -->
     <div id="jaringan" class="tab-content">
         <section class="page-section">
             <div class="section-title">
@@ -743,41 +802,41 @@
             <div class="schedule">
                 <div class="schedule-item hiburan">
                     <h3>Goda Gado Muara</h3>
-                    <div class="schedule-time">07.00 - 10.00</div>
+                    <div class="schedule-time">07.00 - 10.00 WIB</div>
                 </div>
                 <div class="schedule-item talkshow">
                     <h3>Talkshow Produk</h3>
-                    <div class="schedule-time">10.00 - 11.00</div>
+                    <div class="schedule-time">10.00 - 11.00 WIB</div>
                 </div>
                 <div class="schedule-item dangdut">
                     <h3>Sultan Dangdut Riley Cirebon</h3>
-                    <div class="schedule-time">11.00 - 14.00</div>
+                    <div class="schedule-time">11.00 - 14.00 WIB</div>
                 </div>
                 <div class="schedule-item hiburan">
                     <h3>Doski Disko</h3>
-                    <div class="schedule-time">14.00 - 17.30</div>
+                    <div class="schedule-time">14.00 - 17.30 WIB</div>
                 </div>
                 <div class="schedule-item religi">
                     <h3>🕌 Temu Iman</h3>
-                    <div class="schedule-time">17.30 - 18.00</div>
+                    <div class="schedule-time">17.30 - 18.00 WIB</div>
                 </div>
                 <div class="schedule-item dangdut">
                     <h3>Soneta Irama</h3>
-                    <div class="schedule-time">18.00 - 20.00</div>
+                    <div class="schedule-time">18.00 - 20.00 WIB</div>
                 </div>
                 <div class="schedule-item dangdut">
                     <h3>Ruang Dangdut Riley Ke Patroman</h3>
-                    <div class="schedule-time">20.00 - 23.00</div>
+                    <div class="schedule-time">20.00 - 23.00 WIB</div>
                 </div>
                 <div class="schedule-item talkshow">
                     <h3>Talkshow Juara</h3>
-                    <div class="schedule-time">23.00 - 00.00</div>
+                    <div class="schedule-time">23.00 - 00.00 WIB</div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- TAB 4: KONTAK -->
+    <!-- TAB 4: KONTAK (DENGAN LOGO WA, TELP, GMAIL CLICKABLE) -->
     <div id="kontak" class="tab-content">
         <section class="page-section">
             <div class="section-title">
@@ -785,18 +844,49 @@
                 <p>Radio Muara Network</p>
             </div>
             <div class="contact">
+                <!-- WHATSAPP -->
                 <div class="contact-box">
-                    <h3>📱 Ajat Radio Muara</h3>
-                    <p><strong>WhatsApp:</strong> 0812-1345-693</p>
+                    <h3>WhatsApp Official</h3>
+                    <div class="contact-item">
+                        <a href="https://wa.me/6281360001887" target="_blank" class="contact-icon-link">
+                            <img src="wa.png" alt="WhatsApp" class="contact-icon">
+                        </a>
+                        <div class="contact-text">
+                            <p><strong>Nomor WA:</strong></p>
+                            <a href="https://wa.me/6281360001887" target="_blank">0813-6000-1887</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- TELEPON -->
                 <div class="contact-box">
-                    <h3>📱 Litha</h3>
-                    <p><strong>WhatsApp:</strong> 0817-4825-115</p>
+                    <h3>Telepon Kantor</h3>
+                    <div class="contact-item">
+                        <a href="tel:+620214702550" class="contact-icon-link">
+                            <img src="telp.png" alt="Telepon" class="contact-icon">
+                        </a>
+                        <div class="contact-text">
+                            <p><strong>No. Telepon:</strong></p>
+                            <a href="tel:+620214702550">021 4702550</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- EMAIL GMAIL -->
                 <div class="contact-box">
-                    <h3>📧 Email Kantor</h3>
-                    <p>inforadiomuranetwork@gmail.com</p>
+                    <h3>Email Resmi</h3>
+                    <div class="contact-item">
+                        <a href="mailto:inforadiomuranetwork@gmail.com" class="contact-icon-link">
+                            <img src="gmail.png" alt="Gmail" class="contact-icon">
+                        </a>
+                        <div class="contact-text">
+                            <p><strong>Email Kantor:</strong></p>
+                            <a href="mailto:inforadiomuranetwork@gmail.com">inforadiomuranetwork@gmail.com</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- ALAMAT KANTOR -->
                 <div class="contact-box">
                     <h3>📍 Alamat Office</h3>
                     <p><strong>PT. Radio Musik Asyik Nusantara</strong><br>
@@ -819,15 +909,41 @@
     const radio = document.getElementById("radio");
     const playButton = document.getElementById("playButton");
     const volume = document.getElementById("volume");
+    const volumeIcon = document.getElementById("volumeIcon");
     const visualizer = document.getElementById("visualizer");
     const playerCard = document.getElementById("playerCard");
     const navLinks = document.getElementById("navLinks");
     const menuToggle = document.getElementById("menuToggle");
+    const songTitle = document.getElementById("song");
 
+    let previousVolume = 0.8;
     radio.volume = 0.8;
+
+    /* FITUR TOGGLE MUTE / UNMUTE */
+    function toggleMute() {
+        if (radio.muted) {
+            radio.muted = false;
+            volume.value = previousVolume > 0 ? previousVolume : 0.8;
+            radio.volume = volume.value;
+            volumeIcon.innerHTML = "🔊";
+        } else {
+            previousVolume = radio.volume;
+            radio.muted = true;
+            volume.value = 0;
+            volumeIcon.innerHTML = "🔇";
+        }
+    }
 
     volume.addEventListener("input", function () {
         radio.volume = this.value;
+        if (this.value == 0) {
+            radio.muted = true;
+            volumeIcon.innerHTML = "🔇";
+        } else {
+            radio.muted = false;
+            previousVolume = this.value;
+            volumeIcon.innerHTML = "🔊";
+        }
     });
 
     function toggleRadio() {
@@ -857,6 +973,37 @@
         visualizer.classList.remove("playing");
         playerCard.classList.remove("playing-live");
     });
+
+    /* FITUR UPDATE PROGRAM OTOMATIS BERDASARKAN WAKTU WIB */
+    const scheduleData = [
+        { start: "07:00", end: "10:00", title: "Goda Gado Muara" },
+        { start: "10:00", end: "11:00", title: "Talkshow Produk" },
+        { start: "11:00", end: "14:00", title: "Sultan Dangdut Riley Cirebon" },
+        { start: "14:00", end: "17:30", title: "Doski Disko" },
+        { start: "17:30", end: "18:00", title: "🕌 Temu Iman" },
+        { start: "18:00", end: "20:00", title: "Soneta Irama" },
+        { start: "20:00", end: "23:00", title: "Ruang Dangdut Riley Ke Patroman" },
+        { start: "23:00", end: "23:59", title: "Talkshow Juara" },
+        { start: "00:00", end: "07:00", title: "Musik Malam Muara" }
+    ];
+
+    function updateCurrentProgram() {
+        const now = new Date();
+        const currentTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+        
+        let currentProgram = "Radio Muara Network";
+
+        for (let item of scheduleData) {
+            if (currentTime >= item.start && currentTime < item.end) {
+                currentProgram = item.title;
+                break;
+            }
+        }
+        songTitle.innerText = currentProgram;
+    }
+
+    updateCurrentProgram();
+    setInterval(updateCurrentProgram, 30000);
 
     function openTab(tabName) {
         const tabContents = document.querySelectorAll('.tab-content');
