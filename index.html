@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio Muara Network</title>
+    
+    <!-- FAVICON TAB BROWSER -->
+    <link rel="icon" type="image/png" href="logo.png">
+
     <style>
         * {
             margin: 0;
@@ -16,9 +20,14 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #ffffff;
             color: #000000;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* NAVBAR */
@@ -29,7 +38,7 @@
             width: 100%;
             z-index: 1000;
             background: #ffffff;
-            border-bottom: 2px solid #000000;
+            border-bottom: 3px solid #000000;
         }
 
         nav {
@@ -40,6 +49,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
         }
 
         .logo {
@@ -47,8 +57,10 @@
             align-items: center;
             gap: 12px;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 900;
             color: #000000;
+            letter-spacing: -0.5px;
+            cursor: pointer;
         }
 
         .logo-img {
@@ -59,7 +71,7 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             list-style: none;
         }
 
@@ -67,18 +79,56 @@
             color: #000000;
             text-decoration: none;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 800;
             text-transform: uppercase;
+            padding: 8px 14px;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            cursor: pointer;
         }
 
-        .nav-links a:hover {
-            text-decoration: underline;
+        .nav-links a:hover, .nav-links a.active {
+            border: 2px solid #000000;
+            background: #000000;
+            color: #ffffff;
+            box-shadow: 3px 3px 0px #000000;
         }
 
-        /* HERO */
+        .menu-toggle {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        /* SYSTEM TAB / SECTION DISLEKSI */
+        .tab-content {
+            display: none; /* Sembunyikan semua section secara default */
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block; /* Hanya tampilkan section yang aktif */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MAIN WRAPPER */
+        main {
+            margin-top: 75px;
+            flex: 1;
+        }
+
+        /* HERO / DASHBOARD */
         .hero {
-            min-height: 100vh;
-            padding-top: 130px;
+            padding-top: 60px;
+            padding-bottom: 60px;
             width: 90%;
             max-width: 1150px;
             margin: auto;
@@ -86,198 +136,304 @@
             grid-template-columns: 1fr 420px;
             gap: 60px;
             align-items: center;
-            background: #ffffff;
         }
 
         .hero-text small {
-            color: #666666;
-            font-weight: bold;
+            color: #000000;
+            font-weight: 800;
             letter-spacing: 2px;
+            background: #e0e0e0;
+            padding: 4px 10px;
+            border: 1px solid #000000;
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         .hero-text h1 {
-            font-size: clamp(40px, 6vw, 70px);
-            line-height: 1.1;
-            margin: 18px 0;
+            font-size: clamp(40px, 5.5vw, 68px);
+            line-height: 1.05;
+            margin: 15px 0;
             color: #000000;
             font-weight: 900;
+            text-transform: uppercase;
         }
 
         .hero-text h1 span {
             background: #000000;
             color: #ffffff;
-            padding: 2px 10px;
+            padding: 2px 12px;
+            display: inline-block;
+            transform: rotate(-1deg);
         }
 
         .hero-text p {
             max-width: 600px;
-            color: #444444;
+            color: #222222;
             line-height: 1.8;
             font-size: 16px;
+            font-weight: 500;
         }
 
         .hero-buttons {
             margin-top: 30px;
             display: flex;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 14px 24px;
-            border-radius: 4px;
+            padding: 14px 28px;
+            border-radius: 0px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 900;
             cursor: pointer;
             text-transform: uppercase;
             font-size: 13px;
+            transition: 0.15s ease;
         }
 
         .btn-primary {
             color: #ffffff;
             background: #000000;
-            border: 2px solid #000000;
+            border: 3px solid #000000;
+            box-shadow: 5px 5px 0px #888888;
+        }
+
+        .btn-primary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #000000;
         }
 
         .btn-secondary {
             color: #000000;
             background: #ffffff;
-            border: 2px solid #000000;
+            border: 3px solid #000000;
+            box-shadow: 5px 5px 0px #000000;
         }
 
-        /* PLAYER */
+        .btn-secondary:hover {
+            background: #000000;
+            color: #ffffff;
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #888888;
+        }
+
+        /* PLAYER CARD */
         .player {
             padding: 25px;
             background: #ffffff;
-            border-radius: 12px;
-            border: 2px solid #000000;
-            box-shadow: 6px 6px 0px #000000;
+            border: 3px solid #000000;
+            box-shadow: 10px 10px 0px #000000;
+            position: relative;
         }
 
         .album {
-            height: 220px;
-            border-radius: 8px;
+            height: 240px;
+            border: 3px solid #000000;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: #000000;
-            color: #ffffff;
+            background: #ffffff;
+            padding: 20px;
             overflow: hidden;
+            background-image: radial-gradient(#e5e5e5 1.5px, transparent 1.5px);
+            background-size: 12px 12px;
         }
 
         .player-logo {
-            max-height: 120px;
-            max-width: 80%;
+            width: 90%;
+            height: 130px;
             object-fit: contain;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .player:hover .player-logo {
+            transform: scale(1.03);
         }
 
         .live {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 12px;
+            left: 12px;
             padding: 4px 10px;
-            border-radius: 4px;
-            background: #ffffff;
-            color: #000000;
-            font-size: 11px;
-            font-weight: bold;
+            background: #000000;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 900;
             border: 1px solid #000000;
+            z-index: 3;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .playing-live .live-dot {
+            animation: blink 1s infinite alternate;
+        }
+
+        @keyframes blink {
+            from { opacity: 0.2; }
+            to { opacity: 1; }
+        }
+
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5px;
+            height: 35px;
+            z-index: 2;
+            margin-top: 10px;
+        }
+
+        .bar {
+            width: 7px;
+            height: 6px;
+            background-color: #000000;
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+
+        .visualizer.playing .bar {
+            animation: wave 0.8s infinite ease-in-out alternate;
+        }
+
+        .visualizer.playing .bar:nth-child(1) { animation-delay: 0.1s; }
+        .visualizer.playing .bar:nth-child(2) { animation-delay: 0.4s; }
+        .visualizer.playing .bar:nth-child(3) { animation-delay: 0.2s; }
+        .visualizer.playing .bar:nth-child(4) { animation-delay: 0.5s; }
+        .visualizer.playing .bar:nth-child(5) { animation-delay: 0.3s; }
+        .visualizer.playing .bar:nth-child(6) { animation-delay: 0.6s; }
+        .visualizer.playing .bar:nth-child(7) { animation-delay: 0.2s; }
+
+        @keyframes wave {
+            0% { height: 6px; }
+            100% { height: 32px; }
         }
 
         .song-info {
-            padding: 20px 0;
+            padding: 20px 0 15px 0;
         }
 
         .song-info small {
             color: #666666;
-            font-weight: bold;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
         .song-info h2 {
-            margin-top: 5px;
+            margin-top: 4px;
             font-size: 22px;
             color: #000000;
+            font-weight: 900;
         }
 
         .song-info p {
-            color: #555555;
-            margin-top: 4px;
+            color: #444444;
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .controls {
             display: flex;
             align-items: center;
             gap: 15px;
+            padding-top: 10px;
+            border-top: 2px dashed #000000;
         }
 
         .play-button {
             width: 55px;
             height: 55px;
-            border: 2px solid #000000;
+            border: 3px solid #000000;
             border-radius: 50%;
             background: #000000;
             color: #ffffff;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
+            box-shadow: 3px 3px 0px #888888;
+            transition: 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .play-button:hover {
             background: #ffffff;
             color: #000000;
+            box-shadow: 4px 4px 0px #000000;
+            transform: translate(-2px, -2px);
         }
 
         .volume {
             flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
         }
 
         .volume input {
             width: 100%;
             accent-color: #000000;
+            cursor: pointer;
         }
 
-        /* SECTIONS */
-        section {
-            padding: 80px 5%;
-        }
-
-        .bg-gray {
-            background-color: #f4f4f4;
-            border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
+        /* SECTIONS HASIL LOADING */
+        section.page-section {
+            padding: 60px 5%;
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .section-title h2 {
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 900;
             color: #000000;
             text-transform: uppercase;
+            letter-spacing: -1px;
+            display: inline-block;
+            border-bottom: 4px solid #000000;
+            padding-bottom: 5px;
         }
 
         .section-title p {
-            color: #666666;
+            color: #555555;
+            margin-top: 8px;
+            font-weight: 600;
         }
 
         /* STASIUN BULAT */
         .network-grid {
-            max-width: 1150px;
-            margin: auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .station-card {
             background: #ffffff;
             border: 3px solid #000000;
             border-radius: 50%;
-            width: 160px;
-            height: 160px;
+            width: 165px;
+            height: 165px;
             margin: auto;
             display: flex;
             flex-direction: column;
@@ -285,13 +441,16 @@
             justify-content: center;
             text-align: center;
             padding: 15px;
-            box-shadow: 4px 4px 0px #000000;
-            transition: 0.2s;
+            box-shadow: 5px 5px 0px #000000;
+            transition: 0.2s ease;
+            cursor: pointer;
         }
 
         .station-card:hover {
             background: #000000;
             color: #ffffff;
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px #888888;
         }
 
         .station-card:hover .freq,
@@ -301,14 +460,14 @@
         }
 
         .station-card h4 {
-            font-size: 12px;
+            font-size: 11px;
             color: #000000;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .station-card .freq {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 900;
             color: #000000;
             margin: 4px 0;
@@ -316,43 +475,56 @@
 
         .station-card .city {
             font-size: 11px;
-            color: #555555;
-            font-weight: bold;
+            color: #444444;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
-        /* PROGRAM */
+        /* PROGRAM LIST */
         .schedule {
             max-width: 850px;
             margin: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
         .schedule-item {
-            padding: 20px;
+            padding: 20px 25px;
             background: #ffffff;
-            border: 2px solid #000000;
-            border-radius: 6px;
+            border: 3px solid #000000;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 5px 5px 0px #000000;
+            transition: 0.2s;
+        }
+
+        .schedule-item:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #000000;
         }
 
         .schedule-item h3 {
-            font-size: 16px;
+            font-size: 17px;
             color: #000000;
-            font-weight: bold;
+            font-weight: 900;
         }
 
         .schedule-time {
             color: #ffffff;
             background: #000000;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: bold;
+            padding: 6px 14px;
+            font-weight: 900;
             font-size: 13px;
+            border: 2px solid #000000;
+            box-shadow: 2px 2px 0px #888888;
         }
+
+        .schedule-item.religi { background-color: #ffffff; border-left: 12px solid #000000; }
+        .schedule-item.dangdut { background-color: #fcfcfc; border-left: 12px solid #444444; }
+        .schedule-item.talkshow { background-color: #ffffff; border-left: 12px solid #222222; }
+        .schedule-item.hiburan { background-color: #f9f9f9; border-left: 12px solid #666666; }
 
         /* KONTAK */
         .contact {
@@ -360,27 +532,28 @@
             margin: auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 25px;
         }
 
         .contact-box {
             padding: 25px;
             background: #ffffff;
-            border: 2px solid #000000;
-            border-radius: 6px;
-            box-shadow: 4px 4px 0px #000000;
+            border: 3px solid #000000;
+            box-shadow: 6px 6px 0px #000000;
         }
 
         .contact-box h3 {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #000000;
             font-size: 16px;
+            font-weight: 900;
         }
 
         .contact-box p {
-            color: #444444;
-            line-height: 1.5;
+            color: #222222;
+            line-height: 1.6;
             font-size: 14px;
+            font-weight: 500;
         }
 
         /* FOOTER */
@@ -390,19 +563,43 @@
             color: #ffffff;
             text-align: center;
             font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-top: 3px solid #000000;
+            margin-top: auto;
         }
 
-        /* RESPONSIVE */
+        /* RESPONSIVE DESIGN FOR MOBILE */
         @media (max-width: 850px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding-top: 120px;
+            .menu-toggle {
+                display: block;
             }
-            .contact {
-                grid-template-columns: 1fr;
-            }
+
             .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                border-bottom: 3px solid #000000;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0px 6px 0px #000000;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 30px;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -411,178 +608,210 @@
 
 <header>
     <nav>
-        <div class="logo">
+        <div class="logo" onclick="openTab('beranda')">
             <img src="logo.png" alt="Radio Muara Logo" class="logo-img">
             RADIO MUARA NETWORK
         </div>
-        <ul class="nav-links">
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#jaringan">Jaringan</a></li>
-            <li><a href="#program">Program</a></li>
-            <li><a href="#kontak">Kontak</a></li>
+
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a class="nav-btn active" onclick="openTab('beranda')">Beranda</a></li>
+            <li><a class="nav-btn" onclick="openTab('jaringan')">Jaringan</a></li>
+            <li><a class="nav-btn" onclick="openTab('program')">Program</a></li>
+            <li><a class="nav-btn" onclick="openTab('kontak')">Kontak</a></li>
         </ul>
     </nav>
 </header>
 
-<section class="hero" id="beranda">
-    <div class="hero-text">
-        <small>● PT. RADIO MUSIK ASYIK NUSANTARA</small>
-        <h1>Musik Asyik <span>Nusantara</span></h1>
-        <p>Menemani harimu dengan musik terbaik dan informasi terpercaya dari jaringan Radio Muara di seluruh Indonesia.</p>
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="toggleRadio()">▶ Dengarkan Sekarang</button>
-            <a href="#jaringan" class="btn btn-secondary">Jaringan Radio</a>
-        </div>
-    </div>
-
-    <div class="player">
-        <div class="album">
-            <div class="live">● LIVE STREAMING</div>
-            <img src="logo.png" alt="Radio Muara" class="player-logo">
-        </div>
-        <div class="song-info">
-            <small>SEDANG MENGUDARA</small>
-            <h2 id="song">Radio Muara Network</h2>
-            <p id="artist">Suara Musik Nusantara</p>
-        </div>
-        <div class="controls">
-            <button class="play-button" id="playButton" onclick="toggleRadio()">▶</button>
-            <div class="volume">
-                🔊 <input type="range" min="0" max="1" value="0.8" step="0.01" id="volume">
+<main>
+    <!-- TAB 1: BERANDA (DASHBOARD & INFO UTAMA) -->
+    <div id="beranda" class="tab-content active">
+        <section class="hero">
+            <div class="hero-text">
+                <small>PT. RADIO MUSIK ASYIK NUSANTARA</small>
+                <h1>Musik Asyik <span>Nusantara</span></h1>
+                <p>Menemani harimu dengan musik terbaik dan informasi terpercaya dari jaringan Radio Muara di seluruh Indonesia.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="toggleRadio()">▶ Dengarkan Sekarang</button>
+                    <button class="btn btn-secondary" onclick="openTab('jaringan')">Jaringan Radio</button>
+                </div>
             </div>
-        </div>
-        <audio id="radio">
-            <source src="https://ssg.streamingmurah.com:8778/stream/1/" type="audio/mpeg">
-        </audio>
-    </div>
-</section>
 
-<section id="jaringan" class="bg-gray">
-    <div class="section-title">
-        <h2>Jaringan Radio Muara</h2>
-        <p>Tersebar di berbagai kota di Indonesia</p>
+            <!-- PLAYER CARD -->
+            <div class="player" id="playerCard">
+                <div class="album">
+                    <div class="live">
+                        <span class="live-dot"></span> LIVE STREAMING
+                    </div>
+                    
+                    <img src="logo.png" alt="Radio Muara" class="player-logo">
+                    
+                    <div class="visualizer" id="visualizer">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+                <div class="song-info">
+                    <small>SEDANG MENGUDARA</small>
+                    <h2 id="song">Radio Muara Network</h2>
+                    <p id="artist">Suara Musik Nusantara</p>
+                </div>
+                <div class="controls">
+                    <button class="play-button" id="playButton" onclick="toggleRadio()">▶</button>
+                    <div class="volume">
+                        🔊 <input type="range" min="0" max="1" value="0.8" step="0.01" id="volume">
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="network-grid">
-        <div class="station-card">
-            <h4>Radio Muara</h4>
-            <div class="freq">693 AM</div>
-            <div class="city">JAKARTA</div>
-        </div>
-        <div class="station-card">
-            <h4>Radio Muara</h4>
-            <div class="freq">102.1 FM</div>
-            <div class="city">SUBANG</div>
-        </div>
-        <div class="station-card">
-            <h4>Citra Ganttri</h4>
-            <div class="freq">98.0 FM</div>
-            <div class="city">SUKABUMI</div>
-        </div>
-        <div class="station-card">
-            <h4>Muara RPS</h4>
-            <div class="freq">91.5 FM</div>
-            <div class="city">SUKABUMI</div>
-        </div>
-        <div class="station-card">
-            <h4>Aditya Hits</h4>
-            <div class="freq">91.5 FM</div>
-            <div class="city">MASA</div>
-        </div>
-        <div class="station-card">
-            <h4>Radio Muara</h4>
-            <div class="freq">98.5 FM</div>
-            <div class="city">CIREBON</div>
-        </div>
-        <div class="station-card">
-            <h4>Radio Muara</h4>
-            <div class="freq">88.7 FM</div>
-            <div class="city">SUBANG</div>
-        </div>
-        <div class="station-card">
-            <h4>Muara Kiss</h4>
-            <div class="freq">97.1 FM</div>
-            <div class="city">CIBOLANG</div>
-        </div>
-        <div class="station-card">
-            <h4>Muara Paranti</h4>
-            <div class="freq">105.6 FM</div>
-            <div class="city">BANTEN</div>
-        </div>
-        <div class="station-card">
-            <h4>Muara Agnesta</h4>
-            <div class="freq">103.2 FM</div>
-            <div class="city">SUKABUMI</div>
-        </div>
-    </div>
-</section>
 
-<!-- PROGRAM SEKSI -->
-<section id="program">
-    <div class="section-title">
-        <h2>Program Siaran</h2>
-        <p>Program Unggulan Radio Muara</p>
+    <!-- TAB 2: JARINGAN (BARU MUNCUL PAS DIKLIK) -->
+    <div id="jaringan" class="tab-content">
+        <section class="page-section">
+            <div class="section-title">
+                <h2>Jaringan Radio Muara</h2>
+                <p>Tersebar di berbagai kota di Indonesia</p>
+            </div>
+            <div class="network-grid">
+                <div class="station-card">
+                    <h4>Radio Muara</h4>
+                    <div class="freq">693 AM</div>
+                    <div class="city">JAKARTA</div>
+                </div>
+                <div class="station-card">
+                    <h4>Radio Muara</h4>
+                    <div class="freq">102.1 FM</div>
+                    <div class="city">SUBANG</div>
+                </div>
+                <div class="station-card">
+                    <h4>Citra Ganttri</h4>
+                    <div class="freq">98.0 FM</div>
+                    <div class="city">SUKABUMI</div>
+                </div>
+                <div class="station-card">
+                    <h4>Muara RPS</h4>
+                    <div class="freq">91.5 FM</div>
+                    <div class="city">SUKABUMI</div>
+                </div>
+                <div class="station-card">
+                    <h4>Aditya Hits</h4>
+                    <div class="freq">91.5 FM</div>
+                    <div class="city">MASA</div>
+                </div>
+                <div class="station-card">
+                    <h4>Radio Muara</h4>
+                    <div class="freq">98.5 FM</div>
+                    <div class="city">CIREBON</div>
+                </div>
+                <div class="station-card">
+                    <h4>Radio Muara</h4>
+                    <div class="freq">88.7 FM</div>
+                    <div class="city">SUBANG</div>
+                </div>
+                <div class="station-card">
+                    <h4>Muara Kiss</h4>
+                    <div class="freq">97.1 FM</div>
+                    <div class="city">CIBOLANG</div>
+                </div>
+                <div class="station-card">
+                    <h4>Muara Paranti</h4>
+                    <div class="freq">105.6 FM</div>
+                    <div class="city">BANTEN</div>
+                </div>
+                <div class="station-card">
+                    <h4>Muara Agnesta</h4>
+                    <div class="freq">103.2 FM</div>
+                    <div class="city">SUKABUMI</div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="schedule">
-        <div class="schedule-item">
-            <h3>Goda Gado Muara</h3>
-            <div class="schedule-time">07.00 - 10.00</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Talkshow Produk</h3>
-            <div class="schedule-time">10.00 - 11.00</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Sultan Dangdut Riley Cirebon</h3>
-            <div class="schedule-time">11.00 - 14.00</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Doski Disko</h3>
-            <div class="schedule-time">14.00 - 17.30</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Temu Iman</h3>
-            <div class="schedule-time">17.30 - 18.00</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Soneta Irama</h3>
-            <div class="schedule-time">18.00 - 20.00</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Ruang Dangdut Riley Ke Patroman</h3>
-            <div class="schedule-time">20.00 - 23.00</div>
-        </div>
-        <div class="schedule-item">
-            <h3>Talkshow Juara</h3>
-            <div class="schedule-time">23.00 - 00.00</div>
-        </div>
-    </div>
-</section>
 
-<section id="kontak" class="bg-gray">
-    <div class="section-title">
-        <h2>Contact Person</h2>
-        <p>Radio Muara Network</p>
+    <!-- TAB 3: PROGRAM (BARU MUNCUL PAS DIKLIK) -->
+    <div id="program" class="tab-content">
+        <section class="page-section">
+            <div class="section-title">
+                <h2>Program Siaran</h2>
+                <p>Program Unggulan Radio Muara</p>
+            </div>
+            <div class="schedule">
+                <div class="schedule-item hiburan">
+                    <h3>Goda Gado Muara</h3>
+                    <div class="schedule-time">07.00 - 10.00</div>
+                </div>
+                <div class="schedule-item talkshow">
+                    <h3>Talkshow Produk</h3>
+                    <div class="schedule-time">10.00 - 11.00</div>
+                </div>
+                <div class="schedule-item dangdut">
+                    <h3>Sultan Dangdut Riley Cirebon</h3>
+                    <div class="schedule-time">11.00 - 14.00</div>
+                </div>
+                <div class="schedule-item hiburan">
+                    <h3>Doski Disko</h3>
+                    <div class="schedule-time">14.00 - 17.30</div>
+                </div>
+                <div class="schedule-item religi">
+                    <h3>🕌 Temu Iman</h3>
+                    <div class="schedule-time">17.30 - 18.00</div>
+                </div>
+                <div class="schedule-item dangdut">
+                    <h3>Soneta Irama</h3>
+                    <div class="schedule-time">18.00 - 20.00</div>
+                </div>
+                <div class="schedule-item dangdut">
+                    <h3>Ruang Dangdut Riley Ke Patroman</h3>
+                    <div class="schedule-time">20.00 - 23.00</div>
+                </div>
+                <div class="schedule-item talkshow">
+                    <h3>Talkshow Juara</h3>
+                    <div class="schedule-time">23.00 - 00.00</div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="contact">
-        <div class="contact-box">
-            <h3>📱 Ajat Radio Muara</h3>
-            <p><strong>WhatsApp:</strong> 0812-1345-693</p>
-        </div>
-        <div class="contact-box">
-            <h3>📱 Litha</h3>
-            <p><strong>WhatsApp:</strong> 0817-4825-115</p>
-        </div>
-        <div class="contact-box">
-            <h3>📧 Email Kantor</h3>
-            <p>inforadiomuranetwork@gmail.com</p>
-        </div>
-        <div class="contact-box">
-            <h3>📍 Alamat Office</h3>
-            <p><strong>PT. Radio Musik Asyik Nusantara</strong><br>
-            Jl. Cipinang Baru Timur No 15, Rawamangun, Jakarta Timur, 13420</p>
-        </div>
+
+    <!-- TAB 4: KONTAK (BARU MUNCUL PAS DIKLIK) -->
+    <div id="kontak" class="tab-content">
+        <section class="page-section">
+            <div class="section-title">
+                <h2>Contact Person</h2>
+                <p>Radio Muara Network</p>
+            </div>
+            <div class="contact">
+                <div class="contact-box">
+                    <h3>📱 Ajat Radio Muara</h3>
+                    <p><strong>WhatsApp:</strong> 0812-1345-693</p>
+                </div>
+                <div class="contact-box">
+                    <h3>📱 Litha</h3>
+                    <p><strong>WhatsApp:</strong> 0817-4825-115</p>
+                </div>
+                <div class="contact-box">
+                    <h3>📧 Email Kantor</h3>
+                    <p>inforadiomuranetwork@gmail.com</p>
+                </div>
+                <div class="contact-box">
+                    <h3>📍 Alamat Office</h3>
+                    <p><strong>PT. Radio Musik Asyik Nusantara</strong><br>
+                    Jl. Cipinang Baru Timur No 15, Rawamangun, Jakarta Timur, 13420</p>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
+</main>
+
+<!-- ELEMENT AUDIO GLOBAL (PLAYING TERUS MESKIPUN PINDAH TAB) -->
+<audio id="radio">
+    <source src="https://ssg.streamingmurah.com:8778/stream/1/" type="audio/mpeg">
+</audio>
 
 <footer>
     © 2026 Radio Muara Network · PT. Radio Musik Asyik Nusantara
@@ -592,6 +821,10 @@
     const radio = document.getElementById("radio");
     const playButton = document.getElementById("playButton");
     const volume = document.getElementById("volume");
+    const visualizer = document.getElementById("visualizer");
+    const playerCard = document.getElementById("playerCard");
+    const navLinks = document.getElementById("navLinks");
+    const menuToggle = document.getElementById("menuToggle");
 
     radio.volume = 0.8;
 
@@ -605,19 +838,64 @@
                 alert("Gagal memutar audio: " + err.message);
             });
             playButton.innerHTML = "Ⅱ";
+            visualizer.classList.add("playing");
+            playerCard.classList.add("playing-live");
         } else {
             radio.pause();
             playButton.innerHTML = "▶";
+            visualizer.classList.remove("playing");
+            playerCard.classList.remove("playing-live");
         }
     }
 
     radio.addEventListener("play", function () {
         playButton.innerHTML = "Ⅱ";
+        visualizer.classList.add("playing");
+        playerCard.classList.add("playing-live");
     });
 
     radio.addEventListener("pause", function () {
         playButton.innerHTML = "▶";
+        visualizer.classList.remove("playing");
+        playerCard.classList.remove("playing-live");
     });
+
+    /* KONTROL TAB / HALAMAN (PUNYA PERAN MODULER MEMUAT BAGIAN) */
+    function openTab(tabName) {
+        // Hide all tab content
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(tab => tab.classList.remove('active'));
+
+        // Remove active class from nav buttons
+        const navBtns = document.querySelectorAll('.nav-btn');
+        navBtns.forEach(btn => btn.classList.remove('active'));
+
+        // Show specific tab
+        document.getElementById(tabName).classList.add('active');
+
+        // Add active style to matching nav menu
+        const activeNavIndex = ['beranda', 'jaringan', 'program', 'kontak'].indexOf(tabName);
+        if (activeNavIndex !== -1 && navBtns[activeNavIndex]) {
+            navBtns[activeNavIndex].classList.add('active');
+        }
+
+        // Close menu on mobile after click
+        closeMenu();
+
+        // Scroll to top automatically
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* KONTROL MENU MOBILE */
+    function toggleMenu() {
+        navLinks.classList.toggle("active");
+        menuToggle.innerHTML = navLinks.classList.contains("active") ? "✕" : "☰";
+    }
+
+    function closeMenu() {
+        navLinks.classList.remove("active");
+        menuToggle.innerHTML = "☰";
+    }
 </script>
 
 </body>
