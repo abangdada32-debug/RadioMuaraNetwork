@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200, initial-scale=0.3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio Muara Network</title>
     
     <!-- FAVICON TAB BROWSER -->
@@ -23,12 +23,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #000000;
             min-height: 100vh;
-            min-width: 1200px;
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow-x: auto;
-            background-color: #d8dcdb;
+            overflow-x: hidden;
+            background-color: #d8dcdb; /* Fallback color */
         }
 
         /* BACKGROUND LAYER 1 (GRADIENT.PNG) */
@@ -67,13 +66,12 @@
             opacity: 0.8;
         }
 
-        /* NAVBAR HEADER DESKTOP STYLE */
+        /* NAVBAR HEADER */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            min-width: 1200px;
             z-index: 1000;
             background: linear-gradient(180deg, #ffffff 0%, #e6e8e8 100%);
             border-bottom: 2px solid #a0a8a8;
@@ -81,7 +79,8 @@
         }
 
         nav {
-            width: 1150px;
+            width: 90%;
+            max-width: 1150px;
             height: 75px;
             margin: auto;
             display: flex;
@@ -133,6 +132,12 @@
 
         .menu-toggle {
             display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #000000;
+            font-weight: bold;
         }
 
         /* TAB / SECTION SWITCHING */
@@ -155,11 +160,12 @@
             flex: 1;
         }
 
-        /* HERO / DASHBOARD DESKTOP GRID */
+        /* HERO / DASHBOARD */
         .hero {
             padding-top: 60px;
             padding-bottom: 60px;
-            width: 1150px;
+            width: 90%;
+            max-width: 1150px;
             margin: auto;
             display: grid;
             grid-template-columns: 1fr 420px;
@@ -180,7 +186,7 @@
         }
 
         .hero-text h1 {
-            font-size: 58px;
+            font-size: clamp(40px, 5.5vw, 68px);
             line-height: 1.05;
             margin: 15px 0;
             color: #222222;
@@ -291,6 +297,7 @@
             transform: scale(1.03);
         }
 
+        /* BADGE LIVE STREAMING DENGAN TITIK MERAH BERKEDIP */
         .live {
             position: absolute;
             top: 12px;
@@ -450,8 +457,9 @@
 
         /* SECTIONS HASIL LOADING */
         section.page-section {
-            padding: 60px 0;
-            width: 1150px;
+            padding: 60px 5%;
+            width: 90%;
+            max-width: 1150px;
             margin: auto;
         }
 
@@ -480,7 +488,7 @@
         /* GRID JARINGAN STASIUN */
         .network-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 35px 25px;
             justify-items: center;
         }
@@ -597,7 +605,7 @@
 
         /* KONTAK STYLES */
         .contact {
-            width: 1150px;
+            max-width: 950px;
             margin: auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -659,11 +667,9 @@
             text-decoration: underline;
         }
 
-        /* FOOTER */
+        /* FOOTER DENGAN SOSMED ICON & KREDIT */
         footer {
-            padding: 35px 0;
-            width: 100%;
-            min-width: 1200px;
+            padding: 35px 5%;
             background: #1e2226;
             color: #dddddd;
             text-align: center;
@@ -705,6 +711,40 @@
             letter-spacing: 0.5px;
             color: #bbbbbb;
         }
+
+        /* RESPONSIVE DESIGN FOR MOBILE */
+        @media (max-width: 850px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                border-bottom: 2px solid #b5bcbc;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 30px;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -715,6 +755,8 @@
             <img src="logo.png" alt="Radio Muara Logo" class="logo-img">
             RADIO MUARA NETWORK
         </div>
+
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</button>
 
         <ul class="nav-links" id="navLinks">
             <li><a class="nav-btn active" onclick="openTab('beranda')">Beranda</a></li>
@@ -785,56 +827,56 @@
                     <div class="station-card">
                         <img src="logo aditya.png" alt="Radio Aditya">
                     </div>
-                    <span class="station-name">Radio Aditya</span>
+                    <span class="station-name">Radio Hits Aditya</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo cirebon.png" alt="Radio Cirebon">
                     </div>
-                    <span class="station-name">Radio Cirebon</span>
+                    <span class="station-name">Radio Muara Cirebon</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo citra ganitri.png" alt="Citra Ganitri">
                     </div>
-                    <span class="station-name">Radio Citra Ganitri Sukabumi</span>
+                    <span class="station-name">Radio Muara Citra Ganitri Sukabumi</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo jakarta.png" alt="Radio Jakarta">
                     </div>
-                    <span class="station-name">Radio Jakarta</span>
+                    <span class="station-name">Radio Muara Jakarta</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo rps.png" alt="Radio RPS">
                     </div>
-                    <span class="station-name">Radio RPS Pelabuhan Ratu Sukamb</span>
+                    <span class="station-name">Radio Muara RPS Pelabuhan Ratu Sukabumi</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo subang 88.png" alt="Subang 88 FM">
                     </div>
-                    <span class="station-name">Radio Subang</span>
+                    <span class="station-name">Radio Muara Subang</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo subang 102.png" alt="Subang 102.1 FM">
                     </div>
-                    <span class="station-name">Radio DSS Subang</span>
+                    <span class="station-name">Radio Muara DSS Subang</span>
                 </div>
 
                 <div class="station-item">
                     <div class="station-card">
                         <img src="logo paranti.png" alt="Radio Paranti">
                     </div>
-                    <span class="station-name">Radio Paranti</span>
+                    <span class="station-name">Radio Muara Paranti Banten</span>
                 </div>
             </div>
         </section>
@@ -955,6 +997,7 @@
 </audio>
 
 <footer>
+    <!-- LOGO MEDIA SOSIAL (CLICKABLE) -->
     <div class="social-links">
         <a href="https://www.instagram.com/radiomuara/" target="_blank" class="social-icon-link" title="Instagram Radio Muara">
             <img src="ig.png" alt="Instagram" class="social-icon">
@@ -967,6 +1010,7 @@
         </a>
     </div>
 
+    <!-- KREDIT HAK CIPTA -->
     <div class="footer-credit">
         © 2026 Radio Muara Network · PT. Radio Musik Asyik Nusantara
     </div>
@@ -980,6 +1024,7 @@
     const visualizer = document.getElementById("visualizer");
     const playerCard = document.getElementById("playerCard");
     const navLinks = document.getElementById("navLinks");
+    const menuToggle = document.getElementById("menuToggle");
     const songTitle = document.getElementById("song");
 
     let previousVolume = 0.8;
@@ -1085,7 +1130,18 @@
             navBtns[activeNavIndex].classList.add('active');
         }
 
+        closeMenu();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMenu() {
+        navLinks.classList.toggle("active");
+        menuToggle.innerHTML = navLinks.classList.contains("active") ? "✕" : "☰";
+    }
+
+    function closeMenu() {
+        navLinks.classList.remove("active");
+        menuToggle.innerHTML = "☰";
     }
 </script>
 
